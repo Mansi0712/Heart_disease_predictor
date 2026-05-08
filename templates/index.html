@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Health Predictor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .btn-primary {
+            background-color: #667eea;
+            border: none;
+            transition: 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #764ba2;
+            transform: translateY(-2px);
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4">
+                <h2 class="text-center mb-4">❤️ Heart Predictor</h2>
+                <p class="text-muted text-center">Fill in the clinical data below</p>
+                
+                <form action="/predict" method="POST">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Age</label>
+                            <input type="number" name="Age" class="form-control" placeholder="Years" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Resting BP</label>
+                            <input type="number" name="RestingBP" class="form-control" placeholder="mm Hg" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Cholesterol</label>
+                            <input type="number" name="Cholesterol" class="form-control" placeholder="mg/dl" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Max Heart Rate</label>
+                            <input type="number" name="MaxHR" class="form-control" placeholder="Beats/min" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Oldpeak</label>
+                            <input type="number" step="0.1" name="Oldpeak" class="form-control" placeholder="0.0 - 6.0" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Sex</label>
+                            <select name="Sex_M" class="form-select">
+                                <option value="1">Male</option>
+                                <option value="0">Female</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">ST Slope Upward?</label>
+                            <select name="ST_Slope_Up" class="form-select">
+                                <option value="1">Yes (Normal Response)</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100 mt-4 py-2">Get Prediction</button>
+                </form>
+
+                {% if prediction_text %}
+                <div class="result-box {% if 'No' in prediction_text %}bg-success text-white{% else %}bg-danger text-white{% endif %}">
+                    {{ prediction_text }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
