@@ -3,7 +3,7 @@
 A "fancy" machine learning web application that predicts the likelihood of heart disease based on clinical parameters. Built with **Python, Flask, and Scikit-Learn**.
 
 ## 🚀 Features
-* **Predictive Model:** Random Forest/Logistic Regression (whichever you used).
+* **Predictive Model:** KNN (K nearest neighbours).
 * **Interactive UI:** Clean, responsive design using **Bootstrap**.
 * **Instant Results:** Real-time prediction feedback with color-coded alerts.
 
